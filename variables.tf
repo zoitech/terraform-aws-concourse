@@ -11,6 +11,10 @@ variable "aws_region" {
 }
 
 # Instance
+variable "coreos_version" {
+  description = "The CoreOS version to launch."
+  default     = "stable-"
+}
 variable "instance_key_name" {
   description = "The SSH key to use for connecting to the instance."
 }

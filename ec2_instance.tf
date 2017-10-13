@@ -4,7 +4,7 @@ data "aws_ami" "coreos" {
 
   filter {
     name   = "name"
-    values = ["CoreOS-stable*"]
+    values = ["CoreOS-${var.coreos_version}*"]
   }
   filter {
     name   = "virtualization-type"
@@ -20,7 +20,7 @@ resource "aws_instance" "ec2_linux_instance" {
     key_name               = "${var.instance_key_name}"
     user_data              = "${replace(file("${path.module}/userdata.txt"),"/\\r/","")}"
     iam_instance_profile   = "${aws_iam_role.ec2_role.name}"
-    
+
     root_block_device = {
       volume_size = 60
     }
