@@ -18,7 +18,7 @@ resource "null_resource" "setup" {
         "docker rm -f $(docker ps -a -q)",
         "docker run -d --name db -e POSTGRES_DB='concourse' -e POSTGRES_USER='${var.postgres_username}' -e POSTGRES_PASSWORD='${var.postgres_password}' -e PGDATA='/database' --restart=always postgres:${var.postgres_version}",
         "sleep 10",
-        "docker run -d --name web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${var.concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${var.concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${var.postgres_username}:${var.postgres_password}@db:5432/concourse?sslmode=disable' --restart=always -p 8080:8080 --link='db' concourse/concourse:${var.concourse_version} web",
+        "docker run -d --name web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_EXTERNAL_URL='http://${aws_eip.concourse_elastic_ip.public_ip}:8080' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${var.concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${var.concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${var.postgres_username}:${var.postgres_password}@db:5432/concourse?sslmode=disable' --restart=always -p 8080:8080 --link='db' concourse/concourse:${var.concourse_version} web",
         "sleep 4",
         "docker run -d --name worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web' --restart=always concourse/concourse:${var.concourse_version} worker",
       ]
