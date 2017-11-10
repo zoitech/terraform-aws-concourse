@@ -1,5 +1,5 @@
 output "url" {
-  value = "http://${aws_instance.ec2_linux_instance.public_ip}:8080/teams/main/login"
+  value = "${local.external_name}/teams/main/login"
 }
 output "public_ip" {
   value = "${aws_instance.ec2_linux_instance.public_ip}"

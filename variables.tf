@@ -95,6 +95,10 @@ variable "concourse_pipeline_config" {
   description = "The Name of the config file which should be used."
   default     = "config.yml"
 }
+variable "concourse_external_url" {
+  description = "The external URL of the Concourse server."
+  default     = ""
+}
 
 # Trigger for Concourse
 variable "trigger" {
