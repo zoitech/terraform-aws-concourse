@@ -1,3 +1,7 @@
+locals {
+  external_name = "${ length(var.concourse_external_url) > 0 ? var.concourse_external_url : aws_eip.concourse_elastic_ip.public_ip}"
+}
+
 data "template_file" "userdata" {
   template = "${file("${path.module}/userdata.txt")}"
 
