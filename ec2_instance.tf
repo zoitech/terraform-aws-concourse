@@ -18,7 +18,7 @@ resource "aws_instance" "ec2_linux_instance" {
     vpc_security_group_ids = ["${var.instance_sg_id}"]
     subnet_id              = "${var.instance_subnet_id}"
     key_name               = "${var.instance_key_name}"
-    user_data              = "${replace(file("${path.module}/userdata.txt"),"/\\r/","")}"
+    user_data              = "${replace(data.template_file.userdata.rendered,"/\\r/","")}"
     iam_instance_profile   = "${aws_iam_role.ec2_role.name}"
 
     root_block_device = {

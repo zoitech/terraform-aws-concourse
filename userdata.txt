@@ -23,5 +23,63 @@ coreos:
 
         [Install]
         WantedBy=local.target
+    - name: postgress.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Start Postgress
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        Restart=always
+        ExecStartPre= docker stop db
+        ExecStartPre= docker rm db
+        ExecStart=docker run -d --name db -e POSTGRES_DB='concourse' -e POSTGRES_USER='${postgres_username}' -e POSTGRES_PASSWORD='${postgres_password}' -e PGDATA='/database' --restart=always postgres:${postgres_version}
+
+        [Install]
+        WantedBy=local.target
+    - name: concourse_web.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Start Concourse Web
+        After=postgress.service
+        Requires=postgress.service
+
+        [Service]
+        Restart=always
+        ExecStartPre= docker stop web
+        ExecStartPre= docker stop rm
+        ExecStartPre=- mkdir -p /home/core/keys/web keys/worker
+        ExecStartPre=- rm -f /home/core/keys/web/*
+        ExecStartPre=- rm -f /home/core/keys/worker/*
+        ExecStartPre=- ssh-keygen -t rsa -f /home/core/keys/web/tsa_host_key -N ''
+        ExecStartPre=- ssh-keygen -t rsa -f /home/core/keys/web/session_signing_key  -N ''
+        ExecStartPre=- ssh-keygen -t rsa -f /home/core/keys/worker/worker_key   -N ''
+        ExecStartPre=- cp -f /home/core/keys/worker/worker_key.pub /home/core/keys/web/authorized_worker_keys
+        ExecStartPre=- cp -f /home/core/keys/web/tsa_host_key.pub /home/core/keys/worker
+        ExecStart=docker run -d --name web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_EXTERNAL_URL='${external_name}' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${postgres_username}:${postgres_password}@db:5432/concourse?sslmode=disable' --restart=always -p 8080:8080 --link='db' concourse/concourse:${concourse_version} web
+
+        [Install]
+        WantedBy=local.target
+    - name: concourse_worker.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Start Concourse worker
+        After=concourse_web.service
+        Requires=concourse_web.service
+
+        [Service]
+        Restart=always
+        ExecStartPre= docker worker web
+        ExecStartPre= docker worker rm
+        ExecStart=docker run -d --name worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web' --restart=always concourse/concourse:${concourse_version} worker
+        [Install]
+        WantedBy=local.target
     - name: docker.service
       enable: true

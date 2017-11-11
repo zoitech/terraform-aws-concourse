@@ -18,9 +18,6 @@ variable "coreos_version" {
 variable "instance_key_name" {
   description = "The SSH key to use for connecting to the instance."
 }
-variable "instance_key" {
-  description = "The Private Key to connect to the Instance for configuring it."
-}
 variable "instance_name" {
   description = "The name of the Instance."
 }
