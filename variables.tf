@@ -28,13 +28,13 @@ variable "instance_sg_prefix" {
   description = "A prefix which is added to each VPC."
   default = "Councourse"
 }
-variable "subnet_public_id_a" {
+variable "public_sn_a" {
   description = "The Public Subnet A in which the EC2 Instance should be created."
 }
-variable "subnet_public_id_b" {
+variable "public_sn_b" {
   description = "The Public Subnet B in which the EC2 Instance should be created."
 }
-variable "subnet_private_id_a" {
+variable "private_sn_a" {
   description = "The Private Subnet A in which the EC2 Instance should be created."
 }
 variable "vpc_id" {
