@@ -1,5 +1,5 @@
 locals {
-  external_name = "${ length(var.concourse_external_url) > 0 ? var.concourse_external_url : aws_lb.concourse.dns_name}"
+  external_name = "${ length(var.concourse_external_url) > 0 ? var.concourse_external_url : "http://${aws_lb.concourse.dns_name}"}"
 }
 
 data "template_file" "userdata" {

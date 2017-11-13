@@ -1,5 +1,5 @@
 resource "aws_security_group" "RuleGroupLBHttpIn" {
-  name        = "Rule-${var.prefix}.GroupLB-in-HTTP"
+  name        = "Rule-${var.sg_prefix}.GroupLB-in-HTTP"
   description = "Allow all http(s) traffic"
   vpc_id      = "${var.vpc_id}"
 
@@ -11,8 +11,8 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
   }
 
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 8080
+    to_port   = 8080
     protocol  = "tcp"
 
     security_groups = ["${aws_security_group.GroupLB.id}"]
@@ -20,7 +20,7 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
 }
 
 resource "aws_security_group" "GroupLB" {
-  name        = "Group-${var.prefix}.LB"
+  name        = "Group-${var.sg_prefix}.LB"
   description = "Allow all inbound traffic"
   vpc_id      = "${var.vpc_id}"
 

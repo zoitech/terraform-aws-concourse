@@ -9,6 +9,23 @@ variable "aws_region" {
   description = "The AWS region to run in."
   default     = "eu-west-1"
 }
+# network
+variable "public_sn_a" {
+  description = "The Public Subnet A in which the EC2 Instance should be created."
+}
+variable "public_sn_b" {
+  description = "The Public Subnet B in which the EC2 Instance should be created."
+}
+variable "private_sn_a" {
+  description = "The Private Subnet A in which the EC2 Instance should be created."
+}
+variable "vpc_id" {
+  description = "The VPC Id in which the EC2 Instance should be created."
+}
+variable "sg_prefix" {
+  description = "A prefix which is added to each VPC."
+  default = "Councourse"
+}
 
 # Instance
 variable "coreos_version" {
@@ -23,22 +40,6 @@ variable "instance_name" {
 }
 variable "instance_sg_id" {
   description = "The Security Group ID which should be attached to the Instance."
-}
-variable "instance_sg_prefix" {
-  description = "A prefix which is added to each VPC."
-  default = "Councourse"
-}
-variable "public_sn_a" {
-  description = "The Public Subnet A in which the EC2 Instance should be created."
-}
-variable "public_sn_b" {
-  description = "The Public Subnet B in which the EC2 Instance should be created."
-}
-variable "private_sn_a" {
-  description = "The Private Subnet A in which the EC2 Instance should be created."
-}
-variable "vpc_id" {
-  description = "The VPC Id in which the EC2 Instance should be created."
 }
 variable "instance_size" {
   description = "The size of the Instance's disk."
