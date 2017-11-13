@@ -24,8 +24,21 @@ variable "instance_name" {
 variable "instance_sg_id" {
   description = "The Security Group ID which should be attached to the Instance."
 }
-variable "instance_subnet_id" {
-  description = "The Subnet in which the EC2 Instance should be created."
+variable "instance_sg_prefix" {
+  description = "A prefix which is added to each VPC."
+  default = "Councourse"
+}
+variable "subnet_public_id_a" {
+  description = "The Public Subnet A in which the EC2 Instance should be created."
+}
+variable "subnet_public_id_b" {
+  description = "The Public Subnet B in which the EC2 Instance should be created."
+}
+variable "subnet_private_id_a" {
+  description = "The Private Subnet A in which the EC2 Instance should be created."
+}
+variable "vpc_id" {
+  description = "The VPC Id in which the EC2 Instance should be created."
 }
 variable "instance_size" {
   description = "The size of the Instance's disk."
@@ -71,26 +84,6 @@ variable "concourse_username" {
 variable "concourse_password" {
   description = "The Password for the default user on the Concourse Server."
   default     = "concourse"
-}
-variable "concourse_pipeline_create" {
-  description = "Defines if an initial pipeline should be created."
-  default     = false
-}
-variable "concourse_pipeline_name" {
-  description = "The Name of the initial pipeline."
-  default     = "selfupdate"
-}
-variable "concourse_pipeline_path" {
-  description = "The Path where the pipeline is defined in."
-  default     = "update_pipeline"
-}
-variable "concourse_pipeline_yml" {
-  description = "The Name of the pipeline definition."
-  default     = "pipeline.yml"
-}
-variable "concourse_pipeline_config" {
-  description = "The Name of the config file which should be used."
-  default     = "config.yml"
 }
 variable "concourse_external_url" {
   description = "The external URL of the Concourse server."
