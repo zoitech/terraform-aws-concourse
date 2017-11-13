@@ -1,5 +1,11 @@
 #cloud-config
 
+write_files:
+-   encoding: b64
+    content: ${prepare_concourse_keys}
+    path: /home/core/prepare_concourse_keys.sh
+    permissions: '0744'
+
 coreos:
   units:
     - name: swap.service
@@ -55,14 +61,7 @@ coreos:
         ExecStartPre=-/usr/bin/docker stop web
         ExecStartPre=-/usr/bin/docker rm web
         ExecStartPre=-/usr/bin/docker pull concourse/concourse:${concourse_version}
-        ExecStartPre=-/usr/bin/mkdir -p /home/core/keys/web /home/core/keys/worker
-        ExecStartPre=-/usr/bin/rm -f /home/core/keys/web/*
-        ExecStartPre=-/usr/bin/rm -f /home/core/keys/worker/*
-        ExecStartPre=-/usr/bin/ssh-keygen -t rsa -f /home/core/keys/web/tsa_host_key -N ''
-        ExecStartPre=-/usr/bin/ssh-keygen -t rsa -f /home/core/keys/web/session_signing_key -N ''
-        ExecStartPre=-/usr/bin/ssh-keygen -t rsa -f /home/core/keys/worker/worker_key -N ''
-        ExecStartPre=-/usr/bin/cp -f /home/core/keys/worker/worker_key.pub /home/core/keys/web/authorized_worker_keys
-        ExecStartPre=-/usr/bin/cp -f /home/core/keys/web/tsa_host_key.pub /home/core/keys/worker
+        ExecStartPre=-/usr/bin/bash /home/core/prepare_concourse_keys.sh
         ExecStart=/usr/bin/docker run --name web -h web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_EXTERNAL_URL='${external_name}' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${postgres_username}:${postgres_password}@db:5432/concourse?sslmode=disable' --restart=always -p 8080:8080 --link='db' concourse/concourse:${concourse_version} web
 
         [Install]

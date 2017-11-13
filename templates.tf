@@ -13,5 +13,6 @@ data "template_file" "userdata" {
     postgres_username  = "${var.postgres_username}"
     postgres_password  = "${var.postgres_password}"
     postgres_version   = "${var.postgres_version}"
+    prepare_concourse_keys = "${base64encode(file("${path.module}/prepare_concourse_keys.sh"))}"
   }
 }
