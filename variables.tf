@@ -11,7 +11,7 @@ variable "aws_region" {
 }
 variable "prefix" {
   description = "A prefix which is added to each ressource."
-  default = "Councourse"
+  default = "prod"
 }
 # network
 variable "public_sn_a" {
