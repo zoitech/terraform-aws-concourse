@@ -9,6 +9,10 @@ variable "aws_region" {
   description = "The AWS region to run in."
   default     = "eu-west-1"
 }
+variable "prefix" {
+  description = "A prefix which is added to each ressource."
+  default = "Councourse"
+}
 # network
 variable "public_sn_a" {
   description = "The Public Subnet A in which the EC2 Instance should be created."
@@ -22,10 +26,7 @@ variable "private_sn_a" {
 variable "vpc_id" {
   description = "The VPC Id in which the EC2 Instance should be created."
 }
-variable "sg_prefix" {
-  description = "A prefix which is added to each VPC."
-  default = "Councourse"
-}
+
 
 # Instance
 variable "coreos_version" {
@@ -47,10 +48,6 @@ variable "instance_size" {
 }
 
 # Role
-variable "role_name" {
-  description = "The name of the EC2 Role to attach to the EC2 Instance."
-  default     = "ssvc.concourse"
-}
 variable "role_policies" {
   description = "The policies which would be attached to the EC2 Role."
   type        = "list"

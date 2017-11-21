@@ -25,7 +25,7 @@ resource "aws_instance" "ec2_linux_instance" {
       volume_size = 60
     }
     tags {
-      Name = "${var.instance_name}"
+      Name = "${var.prefix}-${var.instance_name}"
     }
     lifecycle = {
         create_before_destroy = true

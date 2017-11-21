@@ -1,5 +1,5 @@
 resource "aws_security_group" "RuleGroupLBHttpIn" {
-  name        = "Rule-${var.sg_prefix}.GroupLB-in-HTTP"
+  name        = "Rule-${var.prefix}.GroupLB-in-HTTP"
   description = "Allow all http(s) traffic"
   vpc_id      = "${var.vpc_id}"
 
@@ -20,7 +20,7 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
 }
 
 resource "aws_security_group" "GroupLB" {
-  name        = "Group-${var.sg_prefix}.LB"
+  name        = "Group-${var.prefix}.LB"
   description = "Allow all inbound traffic"
   vpc_id      = "${var.vpc_id}"
 
