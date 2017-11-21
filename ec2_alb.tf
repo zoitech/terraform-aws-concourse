@@ -17,7 +17,7 @@ resource "aws_lb" "concourse" {
   security_groups = ["${aws_security_group.GroupLB.id}","${var.instance_sg_id}"]
   subnets         = ["${var.public_sn_a}","${var.public_sn_b}"]
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 }
 
 resource "aws_lb_listener" "concource" {
