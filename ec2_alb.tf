@@ -20,7 +20,7 @@ resource "aws_lb" "concourse" {
   enable_deletion_protection = false
 }
 
-resource "aws_lb_listener" "concource" {
+resource "aws_lb_listener" "concource_http" {
   load_balancer_arn = "${aws_lb.concourse.arn}"
   port              = "80"
   protocol          = "HTTP"
@@ -32,7 +32,7 @@ resource "aws_lb_listener" "concource" {
   count = "${var.certificate_arn == "" ? 1 : 0}"
 }
 
-resource "aws_lb_listener" "concource" {
+resource "aws_lb_listener" "concource_https" {
   load_balancer_arn = "${aws_lb.concourse.arn}"
   port              = "443"
   protocol          = "HTTPS"
