@@ -29,4 +29,20 @@ resource "aws_lb_listener" "concource" {
     target_group_arn = "${aws_lb_target_group.concourse.arn}"
     type             = "forward"
   }
+  count = "${var.certificate_arn == "" ? 1 : 0}"
+}
+
+resource "aws_lb_listener" "concource" {
+  load_balancer_arn = "${aws_lb.concourse.arn}"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2015-05"
+  certificate_arn   = "${var.certificate_arn}"
+
+
+  default_action {
+    target_group_arn = "${aws_lb_target_group.concourse.arn}"
+    type             = "forward"
+  }
+  count = "${var.certificate_arn == "" ? 0 : 1}"
 }
