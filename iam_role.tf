@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ec2_role" {
-  name = "${var.role_name}"
+  name = "${var.prefix}-concourse"
 
   assume_role_policy = <<EOF
 {

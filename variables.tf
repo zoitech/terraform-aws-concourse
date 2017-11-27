@@ -9,6 +9,24 @@ variable "aws_region" {
   description = "The AWS region to run in."
   default     = "eu-west-1"
 }
+variable "prefix" {
+  description = "A prefix which is added to each ressource."
+  default = "prod"
+}
+# network
+variable "public_sn_a" {
+  description = "The Public Subnet A in which the EC2 Instance should be created."
+}
+variable "public_sn_b" {
+  description = "The Public Subnet B in which the EC2 Instance should be created."
+}
+variable "private_sn_a" {
+  description = "The Private Subnet A in which the EC2 Instance should be created."
+}
+variable "vpc_id" {
+  description = "The VPC Id in which the EC2 Instance should be created."
+}
+
 
 # Instance
 variable "coreos_version" {
@@ -18,17 +36,11 @@ variable "coreos_version" {
 variable "instance_key_name" {
   description = "The SSH key to use for connecting to the instance."
 }
-variable "instance_key" {
-  description = "The Private Key to connect to the Instance for configuring it."
-}
 variable "instance_name" {
   description = "The name of the Instance."
 }
 variable "instance_sg_id" {
   description = "The Security Group ID which should be attached to the Instance."
-}
-variable "instance_subnet_id" {
-  description = "The Subnet in which the EC2 Instance should be created."
 }
 variable "instance_size" {
   description = "The size of the Instance's disk."
@@ -36,10 +48,6 @@ variable "instance_size" {
 }
 
 # Role
-variable "role_name" {
-  description = "The name of the EC2 Role to attach to the EC2 Instance."
-  default     = "ssvc.concourse"
-}
 variable "role_policies" {
   description = "The policies which would be attached to the EC2 Role."
   type        = "list"
@@ -75,25 +83,9 @@ variable "concourse_password" {
   description = "The Password for the default user on the Concourse Server."
   default     = "concourse"
 }
-variable "concourse_pipeline_create" {
-  description = "Defines if an initial pipeline should be created."
-  default     = false
-}
-variable "concourse_pipeline_name" {
-  description = "The Name of the initial pipeline."
-  default     = "selfupdate"
-}
-variable "concourse_pipeline_path" {
-  description = "The Path where the pipeline is defined in."
-  default     = "update_pipeline"
-}
-variable "concourse_pipeline_yml" {
-  description = "The Name of the pipeline definition."
-  default     = "pipeline.yml"
-}
-variable "concourse_pipeline_config" {
-  description = "The Name of the config file which should be used."
-  default     = "config.yml"
+variable "concourse_external_url" {
+  description = "The external URL of the Concourse server."
+  default     = ""
 }
 
 # Trigger for Concourse

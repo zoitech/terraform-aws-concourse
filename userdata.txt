@@ -1,5 +1,11 @@
 #cloud-config
 
+write_files:
+-   encoding: b64
+    content: ${prepare_concourse_keys}
+    path: /home/core/prepare_concourse_keys.sh
+    permissions: '0744'
+
 coreos:
   units:
     - name: swap.service
@@ -21,6 +27,59 @@ coreos:
         ExecStop=/usr/bin/sh -c "/sbin/swapoff $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
         ExecStopPost=/usr/bin/sh -c "/usr/sbin/losetup -d $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
 
+        [Install]
+        WantedBy=local.target
+    - name: postgress.service
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Start Postgress
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        Restart=always
+        ExecStartPre=-/usr/bin/docker stop db
+        ExecStartPre=-/usr/bin/docker rm db
+        ExecStartPre=-/usr/bin/docker pull postgres:${postgres_version}
+        ExecStart=-/usr/bin/docker run --name db -h db -e POSTGRES_DB='concourse' -e POSTGRES_USER='${postgres_username}' -e POSTGRES_PASSWORD='${postgres_password}' -e PGDATA='/database' --restart=always postgres:${postgres_version}
+
+        [Install]
+        WantedBy=local.target
+    - name: concourse_web.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Start Concourse Web
+        After=postgress.service
+        Requires=postgress.service
+
+        [Service]
+        Restart=always
+        ExecStartPre=-/usr/bin/docker stop web
+        ExecStartPre=-/usr/bin/docker rm web
+        ExecStartPre=-/usr/bin/docker pull concourse/concourse:${concourse_version}
+        ExecStartPre=-/usr/bin/bash /home/core/prepare_concourse_keys.sh
+        ExecStart=/usr/bin/docker run --name web -h web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_EXTERNAL_URL='${external_name}' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${postgres_username}:${postgres_password}@db:5432/concourse?sslmode=disable' --restart=always -p 8080:8080 --link='db' concourse/concourse:${concourse_version} web
+
+        [Install]
+        WantedBy=local.target
+    - name: concourse_worker.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Start Concourse worker
+        After=concourse_web.service
+        Requires=concourse_web.service
+
+        [Service]
+        Restart=always
+        ExecStartPre=-/usr/bin/docker stop worker
+        ExecStartPre=-/usr/bin/docker rm worker
+        ExecStart=/usr/bin/docker run --name worker -h worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web' --restart=always concourse/concourse:${concourse_version} worker
         [Install]
         WantedBy=local.target
     - name: docker.service
