@@ -88,7 +88,7 @@ variable "concourse_password" {
   default     = "concourse"
 }
 variable "concourse_external_url" {
-  description = "The external URL of the Concourse server."
+  description = "The external URL (including http://) of the Concourse server."
   default     = ""
 }
 
