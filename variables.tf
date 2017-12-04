@@ -13,6 +13,10 @@ variable "prefix" {
   description = "A prefix which is added to each ressource."
   default = "prod"
 }
+variable "certificate_arn" {
+  description = "ARN of the certificate."
+  default = ""
+}
 # network
 variable "public_sn_a" {
   description = "The Public Subnet A in which the EC2 Instance should be created."
@@ -84,7 +88,7 @@ variable "concourse_password" {
   default     = "concourse"
 }
 variable "concourse_external_url" {
-  description = "The external URL of the Concourse server."
+  description = "The external URL (including http://) of the Concourse server."
   default     = ""
 }
 

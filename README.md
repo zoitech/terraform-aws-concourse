@@ -2,8 +2,8 @@
 Terraform module which setup a very generic concourse CI server.
 In behind coreOS and docker is used.
 * Create instance
-* Create EC2 roöle
-* OPTIONAL: Add first pipeline
+* Create EC2 role
+* Create ALB (with optional SSL binding)
 
 
 ## Usage
@@ -15,7 +15,6 @@ module "account" {
   concourse_username = "concourse"
   concourse_password = "Sup3rS3cur3"
   instance_key_name = "my_key"
-  instance_key = "${file("iot-stage-deploy.pem")}"
   instance_subnet_id = "${module.network.sn_public_a_id}"
 }
 ```
