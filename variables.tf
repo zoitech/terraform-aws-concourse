@@ -44,7 +44,8 @@ variable "instance_name" {
   description = "The name of the Instance."
 }
 variable "instance_sg_id" {
-  description = "The Security Group ID which should be attached to the Instance."
+  type = "list"
+  description = "The Security Group ID/s which should be attached to the Instance."
 }
 variable "instance_size" {
   description = "The size of the Instance's disk."
