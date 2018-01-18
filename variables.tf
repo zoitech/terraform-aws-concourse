@@ -52,6 +52,12 @@ variable "instance_size" {
   default     = "t2.medium"
 }
 
+# Loadbalancer
+variable "alb_sg_id" {
+  type = "list"
+  description = "The Security Group ID/s which should be attached to the Loadbalancer."
+}
+
 # Role
 variable "role_policies" {
   description = "The policies which would be attached to the EC2 Role."
