@@ -17,7 +17,7 @@ resource "aws_db_instance" "mysql" {
 
   #name                 = "magento"
   username                  = "dbmaster"
-  password                  = "${locals.postgres_password}"
+  password                  = "${local.postgres_password}"
   db_subnet_group_name      = "${aws_db_subnet_group.mysql.id}"
   parameter_group_name      = "default.mysql5.6"
   multi_az                  = false
