@@ -15,7 +15,7 @@ resource "aws_lb" "concourse" {
   name            = "${var.prefix}-concourse-alb"
   internal        = false
   security_groups = ["${aws_security_group.GroupLB.id}","${var.alb_sg_id}"]
-  subnets         = ["${var.public_sn_a}","${var.public_sn_b}"]
+  subnets         = "${var.public_sn}"
 
   enable_deletion_protection = false
 }

@@ -10,3 +10,9 @@ output "public_ip" {
 output "instance_id" {
   value = "${aws_instance.ec2_linux_instance.id}"
 }
+output "postgres_password" {
+  value = "${locals.postgres_password}"
+}
+output "concourse_password" {
+  value = "${locals.concourse_password}"
+}

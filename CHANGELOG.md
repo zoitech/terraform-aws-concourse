@@ -1,0 +1,17 @@
+## 0.0.1 (Unreleased)
+
+BACKWARDS INCOMPATIBILITIES / NOTES:
+
+* ##DESCRIPTION## [##PR##]
+
+NEW FEATURES:
+
+* ##DESCRIPTION## [##PR##]
+
+IMPROVEMENTS:
+
+* ##DESCRIPTION## [##PR##]
+
+BUG FIXES:
+
+* ##DESCRIPTION## [##PR##]

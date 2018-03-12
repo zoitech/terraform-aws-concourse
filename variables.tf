@@ -18,14 +18,13 @@ variable "certificate_arn" {
   default = ""
 }
 # network
-variable "public_sn_a" {
-  description = "The Public Subnet A in which the EC2 Instance should be created."
+variable "public_sn" {
+  type = "list"
+  description = "The Public Subnets in which the LB should be created."
 }
-variable "public_sn_b" {
-  description = "The Public Subnet B in which the EC2 Instance should be created."
-}
-variable "private_sn_a" {
-  description = "The Private Subnet A in which the EC2 Instance should be created."
+variable "private_sn" {
+  type = "list"
+  description = "The Public Subnets in which the EC2 Instance should be created."
 }
 variable "vpc_id" {
   description = "The VPC Id in which the EC2 Instance should be created."
@@ -79,6 +78,9 @@ variable "postgres_password" {
   description = "The Password for the Postgres database."
   default     = "replaceme!"
 }
+variable "postgres_multiaz" {
+  default = "0"
+}
 
 
 # Concourse
@@ -97,6 +99,14 @@ variable "concourse_password" {
 variable "concourse_external_url" {
   description = "The external URL (including http://) of the Concourse server."
   default     = ""
+}
+variable "concourse_db_storage" {
+  description = "Size of the DB Disk."
+  default     = "100"
+}
+variable "concourse_db_size" {
+  description = "Size of the DB Instance."
+  default     = "db.t2.small"
 }
 
 # Trigger for Concourse
