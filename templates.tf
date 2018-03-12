@@ -8,9 +8,9 @@ data "template_file" "userdata" {
   vars {
     external_name      = "${local.external_name}"
     concourse_username = "${var.concourse_username}"
-    concourse_password = "${locals.concourse_password}"
+    concourse_password = "${local.concourse_password}"
     concourse_version  = "${var.concourse_version}"
-    postgres_username  = "${locals.postgres_username}"
+    postgres_username  = "${local.postgres_username}"
     postgres_password  = "${var.postgres_password}"
     postgres_version   = "${var.postgres_version}"
     prepare_concourse_keys = "${base64encode(replace(file("${path.module}/prepare_concourse_keys.sh"),"/\\r/",""))}"
