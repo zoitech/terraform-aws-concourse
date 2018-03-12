@@ -46,7 +46,7 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
   }
 }
 resource "aws_security_group" "RuleGroupWsIn" {
-  name        = "Rule-${var.prefix}.coucourse.WS-in-MYSQL"
+  name        = "Rule-${var.prefix}.coucourse.WS-in-5432"
   description = "Allow all http(s) traffic"
   vpc_id      = "${var.vpc_id}"
 
@@ -58,8 +58,8 @@ resource "aws_security_group" "RuleGroupWsIn" {
   }
 
   ingress {
-    from_port = 3306
-    to_port   = 3306
+    from_port = 5432
+    to_port   = 5432
     protocol  = "tcp"
 
     security_groups = ["${aws_security_group.GroupWS.id}"]
