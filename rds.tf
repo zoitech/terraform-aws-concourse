@@ -1,14 +1,10 @@
 resource "aws_db_subnet_group" "mysql" {
-  name       = "${lower("private-${var.env}")}"
+  name       = "${lower(var.prefix)}-private"
   subnet_ids = "${var.private_sn}"
-
-  tags {
-    Env = "${var.env}"
-  }
 }
 
 resource "aws_db_instance" "mysql" {
-  identifier        = "concourse-db-${lower(var.env)}"
+  identifier        = "${lower(var.prefix)}-concourse-db"
   allocated_storage = "${var.concourse_db_storage}"
   storage_type      = "gp2"
   engine            = "mysql"
@@ -34,10 +30,6 @@ resource "aws_db_instance" "mysql" {
   #monitoring_interval = "${var.db_monitor_interval}"
   apply_immediately = true
 
-  tags {
-    Env = "${var.env}"
-  }
-
   lifecycle {
     prevent_destroy = true
   }
@@ -45,11 +37,11 @@ resource "aws_db_instance" "mysql" {
 
 # Monitoring of DB events
 resource "aws_sns_topic" "mysql" {
-  name = "rds-topic-${var.env}"
+  name = "${lower(var.prefix)}-rds-topic"
 }
 
 resource "aws_db_event_subscription" "mysql" {
-  name      = "rds-sub-${var.env}"
+  name      = "${lower(var.prefix)}-rds-sub"
   sns_topic = "${aws_sns_topic.mysql.arn}"
 
   source_type = "db-instance"
