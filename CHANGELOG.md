@@ -2,7 +2,7 @@
 
 BACKWARDS INCOMPATIBILITIES / NOTES:
 
-* ##DESCRIPTION## [##PR##]
+* Subnets must now be defined as array instead of A and B. The first SN will be used for individual ressource.
 
 NEW FEATURES:
 
