@@ -7,7 +7,7 @@ resource "aws_lb_target_group" "concourse" {
 
 resource "aws_lb_target_group_attachment" "concourse" {
   target_group_arn = "${aws_lb_target_group.concourse.arn}"
-  target_id        = "${aws_instance.ec2_linux_instance.id}"
+  target_id        = "${aws_instance.ec2_docker_instance.id}"
   port             = 8080
 }
 
