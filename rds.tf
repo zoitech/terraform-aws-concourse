@@ -17,7 +17,7 @@ resource "aws_db_instance" "postgres" {
   instance_class    = "${var.concourse_db_size}"
 
   name                      = "concrouse"
-  username                  = "dbmaster"
+  username                  = "${var.postgres_username}"
   password                  = "${local.postgres_password}"
   db_subnet_group_name      = "${aws_db_subnet_group.postgres.id}"
   parameter_group_name      = "${aws_db_parameter_group.concourse.id}"
