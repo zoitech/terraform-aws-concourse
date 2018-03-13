@@ -10,6 +10,7 @@ data "template_file" "userdata" {
     concourse_username = "${var.concourse_username}"
     concourse_password = "${local.concourse_password}"
     concourse_version  = "${var.concourse_version}"
+    postgres_endpoint  = "${aws_db_instance.postgres.endpoint}"
     postgres_username  = "${var.postgres_username}"
     postgres_password  = "${local.postgres_password}"
     postgres_version   = "${var.postgres_version}"

@@ -8,7 +8,7 @@ resource "aws_db_parameter_group" "concourse" {
   family = "postgres9.5"
 }
 
-resource "aws_db_instance" "mysql" {
+resource "aws_db_instance" "postgres" {
   identifier        = "${lower(var.prefix)}-concourse-db"
   allocated_storage = "${var.concourse_db_storage}"
   storage_type      = "gp2"
@@ -41,16 +41,16 @@ resource "aws_db_instance" "mysql" {
 }
 
 # Monitoring of DB events
-resource "aws_sns_topic" "mysql" {
+resource "aws_sns_topic" "postgres" {
   name = "${lower(var.prefix)}-rds-topic"
 }
 
-resource "aws_db_event_subscription" "mysql" {
+resource "aws_db_event_subscription" "postgres" {
   name      = "${lower(var.prefix)}-rds-sub"
-  sns_topic = "${aws_sns_topic.mysql.arn}"
+  sns_topic = "${aws_sns_topic.postgres.arn}"
 
   source_type = "db-instance"
-  source_ids  = ["${aws_db_instance.mysql.id}"]
+  source_ids  = ["${aws_db_instance.postgres.id}"]
 
   # see here for further event categories
   event_categories = [
