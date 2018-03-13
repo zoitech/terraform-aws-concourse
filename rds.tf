@@ -3,6 +3,11 @@ resource "aws_db_subnet_group" "postgres" {
   subnet_ids = "${var.private_sn}"
 }
 
+resource "aws_db_parameter_group" "concourse" {
+  name   = "${var.prefix}-concourse"
+  family = "postgres9.5"
+}
+
 resource "aws_db_instance" "mysql" {
   identifier        = "${lower(var.prefix)}-concourse-db"
   allocated_storage = "${var.concourse_db_storage}"
@@ -11,11 +16,11 @@ resource "aws_db_instance" "mysql" {
   engine_version    = "9.5.2"
   instance_class    = "${var.concourse_db_size}"
 
-  #name                 = "magento"
+  name                      = "concrouse"
   username                  = "dbmaster"
   password                  = "${local.postgres_password}"
   db_subnet_group_name      = "${aws_db_subnet_group.postgres.id}"
-  parameter_group_name      = "default.postgres9.4"
+  parameter_group_name      = "${aws_db_parameter_group.concourse.id}"
   multi_az                  = "${var.postgres_multiaz}"
   backup_retention_period   = 35
   maintenance_window        = "Sat:21:00-Sun:00:00"
