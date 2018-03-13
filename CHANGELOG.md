@@ -1,17 +1,14 @@
-## 0.0.1 (Unreleased)
-
+## 0.0.7 (Unreleased)
+## 0.0.6 (nn.03.2018)
 BACKWARDS INCOMPATIBILITIES / NOTES:
-
-* Subnets must now be defined as array instead of A and B. The first SN will be used for individual ressource.
+* **Subnets must now be defined as array instead of A and B. The first SN will be used for individual ressource.**
 
 NEW FEATURES:
-
-* ##DESCRIPTION## [##PR##]
+* Generate random passwords for concourse and postgres if specified other
+* Deploy a RDS instance for postgres instead of a container
 
 IMPROVEMENTS:
-
-* ##DESCRIPTION## [##PR##]
+* Allow to specify more then two subnetworks
 
 BUG FIXES:
-
-* ##DESCRIPTION## [##PR##]
+* None

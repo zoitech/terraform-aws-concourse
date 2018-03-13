@@ -41,6 +41,7 @@ variable "instance_key_name" {
 }
 variable "instance_name" {
   description = "The name of the Instance."
+  default = "concourse"
 }
 variable "instance_sg_id" {
   type = "list"
@@ -106,11 +107,5 @@ variable "concourse_db_storage" {
 }
 variable "concourse_db_size" {
   description = "Size of the DB Instance."
-  default     = "db.t2.small"
-}
-
-# Trigger for Concourse
-variable "trigger" {
-  description = "A trigger to use, if resources must be created before."
-  default     = "none"
+  default     = "db.t2.micro"
 }
