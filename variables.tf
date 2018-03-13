@@ -76,7 +76,7 @@ variable "postgres_username" {
 }
 variable "postgres_password" {
   description = "The Password for the Postgres database."
-  default     = "replaceme!"
+  default     = ""
 }
 variable "postgres_multiaz" {
   default = "0"
@@ -94,7 +94,7 @@ variable "concourse_username" {
 }
 variable "concourse_password" {
   description = "The Password for the default user on the Concourse Server."
-  default     = "concourse"
+  default     = ""
 }
 variable "concourse_external_url" {
   description = "The external URL (including http://) of the Concourse server."
