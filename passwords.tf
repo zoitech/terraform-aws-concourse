@@ -4,7 +4,8 @@ resource "random_string" "postgres_password" {
 }
 
 resource "random_string" "concourse_password" {
-  length = 16
+  length  = 16
+  special = false
 }
 
 locals {
