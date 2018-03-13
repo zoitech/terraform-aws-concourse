@@ -1,5 +1,6 @@
 resource "random_string" "postgres_password" {
-  length = 16
+  length  = 16
+  special = false
 }
 
 resource "random_string" "concourse_password" {
