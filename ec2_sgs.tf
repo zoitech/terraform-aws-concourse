@@ -11,6 +11,7 @@ resource "aws_security_group" "GroupLB" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "GroupWS" {
   name        = "Group-${var.prefix}.coucourse.WebServer"
   description = "Allow all inbound traffic"
@@ -45,6 +46,7 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
     security_groups = ["${aws_security_group.GroupLB.id}"]
   }
 }
+
 resource "aws_security_group" "RuleGroupWsIn" {
   name        = "Rule-${var.prefix}.coucourse.WS-in-5432"
   description = "Allow all http(s) traffic"
