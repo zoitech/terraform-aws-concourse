@@ -21,7 +21,7 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
 
 resource "aws_security_group" "GroupLB" {
   name        = "Group-${var.prefix}.coucourse.LB"
-  description = "Allow all inbound traffic"
+  description = "Attach security group with loadbalancer name to loadbalancer with only outbound rules"
   vpc_id      = "${var.vpc_id}"
 
   egress {
