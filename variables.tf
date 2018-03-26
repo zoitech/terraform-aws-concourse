@@ -85,6 +85,10 @@ variable "lifecycle_rule_expiration" {
   description = "Delete log files X days after creation"
   default     = 90
 }
+variable "principle_account_id" {
+  description = "Set principle account ID for the region"
+  default     = "156460612806"
+}
 
 
 # Role
