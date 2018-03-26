@@ -10,3 +10,6 @@ output "public_ip" {
 output "instance_id" {
   value = "${aws_instance.ec2_linux_instance.id}"
 }
+output "alb_name" {
+  value = "${aws_lb.concourse.name}"
+}
