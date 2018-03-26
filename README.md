@@ -26,10 +26,12 @@ To enable access logs for the load balancer, set the parameter "enable_alb_acces
   enable_alb_access_logs = true
   s3_log_bucket_name = "log-log-log-for-logging-test"
   s3_log_bucket_Key_name = "concourse-alb-logs"
+  principle_account_id = "054676820928" # See below for more information
   lifecycle_rule_id = "concourse_alb_log_expiration"
   lifecycle_rule_enabled = true
 }
 ```
+The account ID for the principle within the bucket policy needs to match the region to allow the load balancer to write the logs to the bucket.
 
 | Region          | Region Name               | Elastic Load Balancing Account ID  |
 | --------------- |:-------------------------:| ----------------------------------:|
@@ -48,16 +50,16 @@ To enable access logs for the load balancer, set the parameter "enable_alb_acces
 | ap-southeast-1  |	Asia Pacific (Singapore)  |	114774131450                       |
 | ap-southeast-2  |	Asia Pacific (Sydney)	    | 783225319266                       |
 | ap-south-1      |	Asia Pacific (Mumbai)	    | 718504428378                       |
-| sa-east-1	      |South America (São Paulo)  | 507241528517                       |
-| us-gov-west-1*  |	AWS GovCloud (US)         |	048591011584                       |
-| cn-north-1**    |	China (Beijing)           |	638102146993                       |
-| cn-northwest-1**|	China (Ningxia)           |	037604701340                       |
+| sa-east-1	      | South America (São Paulo) | 507241528517                       |
+| us-gov-west-1\* |	AWS GovCloud (US)         |	048591011584                       |
+| cn-north-1 \*\* |	China (Beijing)           |	638102146993                       |
+| cn-northwest-1 \*\*|	China (Ningxia)       |	037604701340                       |
 
 \* This region requires a separate account. For more information, see AWS GovCloud (US).
 
 \*\* This region requires a separate account. For more information, see China (Beijing).
 
-\*\*\* For updated account IDs with corresponding regions, please refer to: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html#attach-bucket-policy
+For updated account IDs with corresponding regions, please refer to: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html#attach-bucket-policy
 
 ## Authors
 Module managed by [Zoi](https://github.com/zoitech).

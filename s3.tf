@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "allow_alb_loggin_access" {
     effect = "Allow"
     principals {
     type = "AWS"
-    identifiers = ["arn:aws:iam::054676820928:root"]
+    identifiers = ["arn:aws:iam::${var.principle_account_id}:root"]
   }
   actions = [
     "s3:PutObject"
