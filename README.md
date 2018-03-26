@@ -1,4 +1,4 @@
-# AWS VPN aconnection
+# Create Concourse Server with Application Load Balancer
 Terraform module which sets up a very generic concourse CI server.
 CoreOS and docker are used in behind.
 * Create instance
