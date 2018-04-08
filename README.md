@@ -38,15 +38,15 @@ The account ID for the principle within the bucket policy needs to match the reg
 | us-east-1       | US East (N. Virginia)     | 127311923021                       |
 | us-east-2       | US East (Ohio)            | 033677994240                       |
 | us-west-1       | US West (N. California)   | 027434742980                       |
-| us-west-2       | US West (Oregon)          | 033677994240                       |
-| ca-central-1    | Canada (Central)          | 127311923021                       |
-| eu-central-1    | EU (Frankfurt)            | 033677994240                       |
-| eu-west-1       | EU (Ireland)              | 127311923021                       |
-| eu-west-2       | EU (London)               | 033677994240                       |
-| eu-west-3       | EU (Paris)                | 127311923021                       |
-| ap-northeast-1  | Asia Pacific (Tokyo)      | 033677994240                       |
-| ap-northeast-2  | Asia Pacific (Seoul))     | 127311923021                       |
-| ap-northeast-3  | Asia Pacific (Osaka-Local)| 033677994240                       |
+| us-west-2       | US West (Oregon)          | 797873946194                       |
+| ca-central-1    | Canada (Central)          | 985666609251                       |
+| eu-central-1    | EU (Frankfurt)            | 054676820928                       |
+| eu-west-1       | EU (Ireland)              | 156460612806                       |
+| eu-west-2       | EU (London)               | 652711504416                       |
+| eu-west-3       | EU (Paris)                | 009996457667                       |
+| ap-northeast-1  | Asia Pacific (Tokyo)      | 582318560864                       |
+| ap-northeast-2  | Asia Pacific (Seoul))     | 600734575887                       |
+| ap-northeast-3  | Asia Pacific (Osaka-Local)| 383597477331                       |
 | ap-southeast-1  |	Asia Pacific (Singapore)  |	114774131450                       |
 | ap-southeast-2  |	Asia Pacific (Sydney)	    | 783225319266                       |
 | ap-south-1      |	Asia Pacific (Mumbai)	    | 718504428378                       |
