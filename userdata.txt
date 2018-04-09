@@ -61,7 +61,7 @@ coreos:
         Restart=always
         ExecStartPre=-/usr/bin/docker stop worker
         ExecStartPre=-/usr/bin/docker rm worker
-        ExecStart=/usr/bin/docker run --name worker -h worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web' --restart=always concourse/concourse:${concourse_version} worker
+        ExecStart=/usr/bin/docker run --name worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web:2222' --restart=always concourse/concourse:${concourse_version} worker
         [Install]
         WantedBy=local.target
     - name: docker.service

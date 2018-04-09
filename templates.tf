@@ -13,7 +13,6 @@ data "template_file" "userdata" {
     postgres_endpoint      = "${aws_db_instance.postgres.endpoint}"
     postgres_username      = "${var.postgres_username}"
     postgres_password      = "${local.postgres_password}"
-    postgres_version       = "${var.postgres_version}"
     prepare_concourse_keys = "${base64encode(replace(file("${path.module}/prepare_concourse_keys.sh"),"/\\r/",""))}"
   }
 }

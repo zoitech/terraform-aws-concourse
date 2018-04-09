@@ -13,7 +13,7 @@ resource "aws_db_instance" "postgres" {
   allocated_storage = "${var.concourse_db_storage}"
   storage_type      = "gp2"
   engine            = "postgres"
-  engine_version    = "9.5.2"
+  engine_version    = "${var.postgres_version}"
   instance_class    = "${var.concourse_db_size}"
 
   name                      = "concourse"
