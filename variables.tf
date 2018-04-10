@@ -76,7 +76,7 @@ variable "role_policies" {
 # Postgres
 variable "postgres_version" {
   description = "The Postgres Version to use."
-  default     = "9.5.2"
+  default     = "9.5.10"
 }
 
 variable "postgres_username" {
