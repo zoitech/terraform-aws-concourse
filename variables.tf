@@ -65,6 +65,39 @@ variable "alb_sg_id" {
   type        = "list"
   description = "The Security Group ID/s which should be attached to the Loadbalancer."
 }
+variable "enable_alb_access_logs" {
+  description = "Turn alb access logs on or off."
+  default     = false
+}
+variable "s3_log_bucket_name" {
+  description = "Name of the logs bucket."
+  default     = ""
+}
+variable "s3_log_bucket_Key_name" {
+  description = "Name of the folder to store logs in the bucket."
+  default     = ""
+}
+variable "lifecycle_rule_id" {
+  description = "Name of the lifecyle rule id."
+  default     = ""
+}
+variable "lifecycle_rule_enabled" {
+  description = "To enable the lifecycle rule"
+  default     = false
+}
+variable "lifecycle_rule_prefix" {
+  description = "Lifecycle rule prefix."
+  default     = ""
+}
+variable "lifecycle_rule_expiration" {
+  description = "Delete log files X days after creation"
+  default     = 90
+}
+variable "principle_account_id" {
+  description = "Set principle account ID for the region"
+  default     = "156460612806"
+}
+
 
 # Role
 variable "role_policies" {

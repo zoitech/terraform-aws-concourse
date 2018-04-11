@@ -17,6 +17,13 @@ resource "aws_lb" "concourse" {
   security_groups = ["${aws_security_group.GroupLB.id}", "${var.alb_sg_id}"]
   subnets         = "${var.public_sn}"
 
+  access_logs {
+   #bucket  = "${aws_s3_bucket.log_bucket.bucket}"
+   bucket  = "${var.s3_log_bucket_name}"
+   prefix  = "${var.s3_log_bucket_Key_name}"
+   enabled = "${var.enable_alb_access_logs}" #default = false
+ }
+
   enable_deletion_protection = false
 }
 

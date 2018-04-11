@@ -21,3 +21,6 @@ output "postgres_password" {
 output "concourse_password" {
   value = "${local.concourse_password}"
 }
+output "alb_name" {
+  value = "${aws_lb.concourse.name}"
+}
