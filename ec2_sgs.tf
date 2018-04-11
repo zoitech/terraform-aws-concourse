@@ -1,7 +1,7 @@
 # Groups
 resource "aws_security_group" "GroupLB" {
   name        = "Group-${var.prefix}.coucourse.LB"
-  description = "Allow all inbound traffic"
+  description = "Allow all outbound traffic"
   vpc_id      = "${var.vpc_id}"
 
   egress {
@@ -14,7 +14,7 @@ resource "aws_security_group" "GroupLB" {
 
 resource "aws_security_group" "GroupWS" {
   name        = "Group-${var.prefix}.coucourse.WebServer"
-  description = "Allow all inbound traffic"
+  description = "Allow all outbound traffic"
   vpc_id      = "${var.vpc_id}"
 
   egress {
