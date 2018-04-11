@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "postgres" {
   name       = "${lower(var.prefix)}-private"
-  subnet_ids = "${var.private_sn}"
+  subnet_ids = ["${var.private_sn}"]
 }
 
 resource "aws_db_parameter_group" "concourse" {
