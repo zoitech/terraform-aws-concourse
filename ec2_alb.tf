@@ -7,15 +7,15 @@ resource "aws_lb_target_group" "concourse" {
 
 resource "aws_lb_target_group_attachment" "concourse" {
   target_group_arn = "${aws_lb_target_group.concourse.arn}"
-  target_id        = "${aws_instance.ec2_linux_instance.id}"
+  target_id        = "${aws_instance.ec2_docker_instance.id}"
   port             = 8080
 }
 
 resource "aws_lb" "concourse" {
   name            = "${var.prefix}-concourse-alb"
   internal        = false
-  security_groups = ["${aws_security_group.GroupLB.id}","${var.alb_sg_id}"]
-  subnets         = ["${var.public_sn_a}","${var.public_sn_b}"]
+  security_groups = ["${aws_security_group.GroupLB.id}", "${var.alb_sg_id}"]
+  subnets         = "${var.public_sn}"
 
   access_logs {
    #bucket  = "${aws_s3_bucket.log_bucket.bucket}"
@@ -36,6 +36,7 @@ resource "aws_lb_listener" "concource_http" {
     target_group_arn = "${aws_lb_target_group.concourse.arn}"
     type             = "forward"
   }
+
   count = "${var.certificate_arn == "" ? 1 : 0}"
 }
 
@@ -46,10 +47,10 @@ resource "aws_lb_listener" "concource_https" {
   ssl_policy        = "ELBSecurityPolicy-2015-05"
   certificate_arn   = "${var.certificate_arn}"
 
-
   default_action {
     target_group_arn = "${aws_lb_target_group.concourse.arn}"
     type             = "forward"
   }
+
   count = "${var.certificate_arn == "" ? 0 : 1}"
 }
