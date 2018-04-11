@@ -15,7 +15,7 @@ resource "aws_lb" "concourse" {
   name            = "${var.prefix}-concourse-alb"
   internal        = false
   security_groups = ["${aws_security_group.GroupLB.id}", "${var.alb_sg_id}"]
-  subnets         = "${var.public_sn}"
+  subnets         = ["${var.public_sn}"]
 
   access_logs {
    #bucket  = "${aws_s3_bucket.log_bucket.bucket}"
