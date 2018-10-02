@@ -24,3 +24,13 @@ output "concourse_password" {
 output "alb_name" {
   value = "${aws_lb.concourse.name}"
 }
+output "alb_zone_id" {
+  description = "concourse LB's zone-id. used for route53"
+  value = "${aws_lb.concourse.zone_id}"
+}
+
+output "alb_arn" {
+  description = "concourse LB ARN"
+  value = "${aws_lb.concourse.arn}"
+}
+
