@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "postgres" {
   name       = "${lower(var.prefix)}-private"
-  subnet_ids = ["${var.private_sn}"]
+  subnet_ids = var.private_sn
 }
 
 resource "aws_db_parameter_group" "concourse" {
@@ -10,22 +10,22 @@ resource "aws_db_parameter_group" "concourse" {
 
 resource "aws_db_instance" "postgres" {
   identifier        = "${lower(var.prefix)}-concourse-db"
-  allocated_storage = "${var.concourse_db_storage}"
+  allocated_storage = var.concourse_db_storage
   storage_type      = "gp2"
   engine            = "postgres"
-  engine_version    = "${var.postgres_version}"
-  instance_class    = "${var.concourse_db_size}"
+  engine_version    = var.postgres_version
+  instance_class    = var.concourse_db_size
 
   name                      = "concourse"
-  username                  = "${var.postgres_username}"
-  password                  = "${local.postgres_password}"
-  db_subnet_group_name      = "${aws_db_subnet_group.postgres.id}"
-  parameter_group_name      = "${aws_db_parameter_group.concourse.id}"
-  multi_az                  = "${var.postgres_multiaz}"
+  username                  = var.postgres_username
+  password                  = local.postgres_password
+  db_subnet_group_name      = aws_db_subnet_group.postgres.id
+  parameter_group_name      = aws_db_parameter_group.concourse.id
+  multi_az                  = var.postgres_multiaz
   backup_retention_period   = 35
   maintenance_window        = "Sat:21:00-Sun:00:00"
   backup_window             = "00:00-02:00"
-  vpc_security_group_ids    = ["${aws_security_group.RuleGroupWsIn.id}"]
+  vpc_security_group_ids    = [aws_security_group.RuleGroupWsIn.id]
   copy_tags_to_snapshot     = true
   snapshot_identifier       = ""
   skip_final_snapshot       = false
@@ -47,13 +47,14 @@ resource "aws_sns_topic" "postgres" {
 
 resource "aws_db_event_subscription" "postgres" {
   name      = "${lower(var.prefix)}-rds-sub"
-  sns_topic = "${aws_sns_topic.postgres.arn}"
+  sns_topic = aws_sns_topic.postgres.arn
 
   source_type = "db-instance"
-  source_ids  = ["${aws_db_instance.postgres.id}"]
+  source_ids  = [aws_db_instance.postgres.id]
 
   # see here for further event categories
   event_categories = [
     "low storage",
   ]
 }
+

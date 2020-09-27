@@ -16,15 +16,17 @@ resource "aws_iam_role" "ec2_role" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "ec2_role_admin" {
-  role       = "${aws_iam_role.ec2_role.name}"
-  policy_arn = "${element(var.role_policies, count.index)}"
-  count      = "${length(var.role_policies)}"
+  role       = aws_iam_role.ec2_role.name
+  policy_arn = element(var.role_policies, count.index)
+  count      = length(var.role_policies)
 }
 
 resource "aws_iam_instance_profile" "ec2_role_profile" {
-  name = "${aws_iam_role.ec2_role.name}"
-  role = "${aws_iam_role.ec2_role.name}"
+  name = aws_iam_role.ec2_role.name
+  role = aws_iam_role.ec2_role.name
 }
+

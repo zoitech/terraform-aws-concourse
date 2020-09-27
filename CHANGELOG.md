@@ -1,3 +1,7 @@
+## 0.0.8
+ENHANCEMENTS:
+* Upgrade TF to version 12
+
 ## 0.0.7 (Unreleased)
 ## 0.0.6 (nn.03.2018)
 BACKWARDS INCOMPATIBILITIES / NOTES:
