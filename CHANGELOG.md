@@ -1,6 +1,7 @@
 ## 0.0.8
 ENHANCEMENTS:
 * Upgrade TF to version 12
+* Add custom variable volume size for docker instance
 
 ## 0.0.7 (Unreleased)
 ## 0.0.6 (nn.03.2018)
