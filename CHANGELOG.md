@@ -1,7 +1,11 @@
-## 0.0.8
+## 1.0.0
 ENHANCEMENTS:
-* Upgrade TF to version 12
-* Add custom variable volume size for docker instance
+* Version 12 upgrade
+
+## 0.0.8
+NEW FEATURES:
+* Add custom volume size for concourse instance
+* Update CoreOs AMI owners
 
 ## 0.0.7 (Unreleased)
 ## 0.0.6 (nn.03.2018)
