@@ -1,6 +1,6 @@
 data "aws_ami" "coreos" {
   most_recent = true
-  owners      = ["595879546273"]
+  owners      = ["679593333241"]
 
   filter {
     name   = "name"
@@ -23,7 +23,7 @@ resource "aws_instance" "ec2_docker_instance" {
   iam_instance_profile   = "${aws_iam_role.ec2_role.name}"
 
   root_block_device = {
-    volume_size = 60
+    volume_size = "${var.instance_volume_size}"
   }
 
   tags {
