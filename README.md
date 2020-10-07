@@ -11,8 +11,8 @@ CoreOS and docker are used in behind.
 module "concourse" {
   source  = "git::https://github.com/zoitech/terraform-aws-concourse.git?ref=v0.0.5"
   instance_name = "concourse"
-  instance_sg_id = "${aws_security_group.group_concourse.id}"
-  alb_sg_id = "${aws_security_group.allow_all.id}"
+  instance_sg_id = aws_security_group.group_concourse.id
+  alb_sg_id = aws_security_group.allow_all.id
   concourse_username = "concourse"
   concourse_password = "Sup3rS3cur3"
   instance_key_name = "my_key"
