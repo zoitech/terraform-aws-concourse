@@ -22,13 +22,9 @@ resource "aws_instance" "ec2_docker_instance" {
   user_data              = replace(data.template_file.userdata.rendered, "/\\r/", "")
   iam_instance_profile   = aws_iam_role.ec2_role.name
 
-<<<<<<< HEAD
+
   root_block_device {
     volume_size = var.instance_volume_size
-=======
-  root_block_device = {
-    volume_size = "${var.instance_volume_size}"
->>>>>>> c398ad639c23913ea783eb43e38142fdc8b5b18a
   }
 
   tags = {
