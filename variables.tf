@@ -50,6 +50,12 @@ variable "instance_name" {
   default     = "concourse"
 }
 
+
+variable "instance_volume_size" {
+  description = "Custom volume size for concourse"
+  default     = "60"
+}
+
 variable "instance_sg_id" {
   type        = "list"
   description = "The Security Group ID/s which should be attached to the Instance."

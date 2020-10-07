@@ -1,3 +1,8 @@
+## 0.1.0
+NEW FEATURES:
+* Add custom volume size for concourse instance
+* Update CoreOs AMI owners
+
 ## 0.0.7 (Unreleased)
 ## 0.0.6 (nn.03.2018)
 BACKWARDS INCOMPATIBILITIES / NOTES:
