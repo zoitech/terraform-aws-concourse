@@ -51,10 +51,6 @@ variable "instance_name" {
   default     = "concourse"
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c398ad639c23913ea783eb43e38142fdc8b5b18a
 variable "instance_volume_size" {
   description = "Custom volume size for concourse"
   default     = "60"
