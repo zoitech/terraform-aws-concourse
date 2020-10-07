@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 ## 1.0.0
 ENHANCEMENTS:
 * Version 12 upgrade
 
+=======
+>>>>>>> c398ad639c23913ea783eb43e38142fdc8b5b18a
 ## 0.1.0
 NEW FEATURES:
 * Add custom volume size for concourse instance
