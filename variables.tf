@@ -1,11 +1,12 @@
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
 
 # Account
 provider "aws" {
-  region = "${var.aws_region}"
+  region = var.region
 }
 
-variable "aws_region" {
+variable "region" {
   description = "The AWS region to run in."
   default     = "eu-west-1"
 }
@@ -22,12 +23,12 @@ variable "certificate_arn" {
 
 # network
 variable "public_sn" {
-  type        = "list"
+  type        = list(string)
   description = "The Public Subnets in which the LB should be created."
 }
 
 variable "private_sn" {
-  type        = "list"
+  type        = list(string)
   description = "The Public Subnets in which the EC2 Instance should be created."
 }
 
@@ -50,14 +51,17 @@ variable "instance_name" {
   default     = "concourse"
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> c398ad639c23913ea783eb43e38142fdc8b5b18a
 variable "instance_volume_size" {
   description = "Custom volume size for concourse"
   default     = "60"
 }
 
 variable "instance_sg_id" {
-  type        = "list"
+  type        = list(string)
   description = "The Security Group ID/s which should be attached to the Instance."
 }
 
@@ -68,47 +72,54 @@ variable "instance_size" {
 
 # Loadbalancer
 variable "alb_sg_id" {
-  type        = "list"
+  type        = list(string)
   description = "The Security Group ID/s which should be attached to the Loadbalancer."
 }
+
 variable "enable_alb_access_logs" {
   description = "Turn alb access logs on or off."
   default     = false
 }
+
 variable "s3_log_bucket_name" {
   description = "Name of the logs bucket."
   default     = ""
 }
+
 variable "s3_log_bucket_Key_name" {
   description = "Name of the folder to store logs in the bucket."
   default     = ""
 }
+
 variable "lifecycle_rule_id" {
   description = "Name of the lifecyle rule id."
   default     = ""
 }
+
 variable "lifecycle_rule_enabled" {
   description = "To enable the lifecycle rule"
   default     = false
 }
+
 variable "lifecycle_rule_prefix" {
   description = "Lifecycle rule prefix."
   default     = ""
 }
+
 variable "lifecycle_rule_expiration" {
   description = "Delete log files X days after creation"
   default     = 90
 }
+
 variable "principle_account_id" {
   description = "Set principle account ID for the region"
   default     = "156460612806"
 }
 
-
 # Role
 variable "role_policies" {
   description = "The policies which would be attached to the EC2 Role."
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 
@@ -162,3 +173,4 @@ variable "concourse_db_size" {
   description = "Size of the DB Instance."
   default     = "db.t2.micro"
 }
+
