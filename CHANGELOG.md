@@ -1,4 +1,4 @@
-## 0.0.8
+## 0.1.0
 NEW FEATURES:
 * Add custom volume size for concourse instance
 * Update CoreOs AMI owners
