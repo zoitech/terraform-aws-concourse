@@ -56,6 +56,10 @@ variable "instance_volume_size" {
   default     = "60"
 }
 
+variable "instance_ami" {
+  description = "ami"
+}
+
 variable "instance_sg_id" {
   type        = "list"
   description = "The Security Group ID/s which should be attached to the Instance."

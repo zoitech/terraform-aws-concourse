@@ -1,3 +1,7 @@
+## 0.2.0
+NEW FEATURES:
+* Add instance_ami variable
+
 ## 0.1.0
 NEW FEATURES:
 * Add custom volume size for concourse instance

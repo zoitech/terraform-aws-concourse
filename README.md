@@ -21,6 +21,7 @@ module "concourse" {
   private_sn_a = "subnet-bc123456"
   vpc_id = "vpc-98ad1234"
   instance_volume_size = "200" #default 60
+  instance_ami = "ami-io34w5"
 ```
 To enable access logs for the load balancer, set the parameter "enable_alb_access_logs = true". When set to true, the following parameters should also be configured as shown below:
 ```hcl
