@@ -1,6 +1,13 @@
+## 1.1.0
+* Add instance_ami variable V12
+
 ## 1.0.0
 ENHANCEMENTS:
 * Version 12 upgrade
+
+## 0.2.0
+NEW FEATURES:
+* Add instance_ami variable
 
 ## 0.1.0
 NEW FEATURES:
