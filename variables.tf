@@ -138,7 +138,7 @@ variable "postgres_multiaz" {
 
 variable "postgres_family" {
   description = "The Postgres Family to use."
-  default     = "9.5"
+  default     = "postgres9.5"
 }
 
 # Concourse
