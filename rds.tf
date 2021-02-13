@@ -4,8 +4,8 @@ resource "aws_db_subnet_group" "postgres" {
 }
 
 resource "aws_db_parameter_group" "concourse" {
-  name   = "${var.prefix}-concourse"
-  family = "postgres9.5"
+  name   = "${var.prefix}-concourse-${var.postgres_family}"
+  family = var.postgres_family
 }
 
 resource "aws_db_instance" "postgres" {
