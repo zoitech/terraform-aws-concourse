@@ -1,3 +1,8 @@
+## 0.3.0
+NEW FEATURES:
+* Add postgres_family variable
+* Rename postgres family to "${var.prefix}-concourse-${var.postgres_family}" to prevent cycle dependency during upgrade.
+
 ## 0.2.0
 NEW FEATURES:
 * Add instance_ami variable
