@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Concourse worker
+After=concourse_web.service
+Requires=concourse_web.service
+
+[Service]
+User=root
+ExecStart=/usr/bin/bash /home/ec2-user/concourse.sh worker
+
+ExecStop=/usr/bin/docker stop worker
+ExecStop=/usr/bin/docker rm worker
+
+[Install]
+WantedBy=local.target

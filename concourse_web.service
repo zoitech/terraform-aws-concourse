@@ -1,0 +1,15 @@
+[Unit]
+Description=Start Concourse Web
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+ExecStartPre=-/bin/bash /home/ec2-user/prepare_concourse_keys.sh
+ExecStart=/usr/bin/bash /home/ec2-user/concourse.sh web
+
+ExecStop=/usr/bin/docker stop web
+ExecStop=/usr/bin/docker rm   web
+
+[Install]
+WantedBy=local.target

@@ -1,3 +1,7 @@
+## 0.4.0
+NEW FEATURES:
+* update user data to support Amazon Linux AMIs
+
 ## 0.3.0
 NEW FEATURES:
 * Add postgres_family variable

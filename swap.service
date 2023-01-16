@@ -1,0 +1,18 @@
+[Unit]
+Description=Turn on swap
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStartPre=/bin/bash -c "\
+    rm -f 2GiB.swap && \
+    fallocate -l 2G 2GiB.swap && \
+    chmod 600 2GiB.swap && \
+    mkswap 2GiB.swap && \
+    losetup -f 2GiB.swap"
+ExecStart=/usr/bin/sh -c "/sbin/swapon $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
+ExecStop=/usr/bin/sh -c "/sbin/swapoff $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
+ExecStopPost=/usr/bin/sh -c "/usr/sbin/losetup -d $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
+
+[Install]
+WantedBy=local.target

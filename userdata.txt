@@ -3,66 +3,36 @@
 write_files:
 -   encoding: b64
     content: ${prepare_concourse_keys}
-    path: /home/core/prepare_concourse_keys.sh
+    path: /home/ec2-user/prepare_concourse_keys.sh
     permissions: '0744'
+-   encoding: b64
+    content: ${concourse_worker_service}        
+    path: /etc/systemd/system/concourse_worker.service
+    permissions: '0755'  
+-   encoding: b64
+    content: ${swap_service}
+    path: /etc/systemd/system/swap.service
+    permissions: '0755'
+-   encoding: b64
+    content: ${concourse_web_service}
+    path: /etc/systemd/system/concourse_web.service
+    permissions: '0755'
+-   encoding: b64
+    content: ${concourse}
+    path: /home/ec2-user/concourse.sh
+    permissions: '0755'
 
-coreos:
-  units:
-    - name: swap.service
-      command: start
-      content: |
-        [Unit]
-        Description=Turn on swap
+repo_update: true
+repo_upgrade: all
+packages: 
+  docker
 
-        [Service]
-        Type=oneshot
-        RemainAfterExit=true
-        ExecStartPre=/bin/bash -c "\
-          rm -f 2GiB.swap && \
-          fallocate -l 2G 2GiB.swap && \
-          chmod 600 2GiB.swap && \
-          mkswap 2GiB.swap && \
-          losetup -f 2GiB.swap"
-        ExecStart=/usr/bin/sh -c "/sbin/swapon $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
-        ExecStop=/usr/bin/sh -c "/sbin/swapoff $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
-        ExecStopPost=/usr/bin/sh -c "/usr/sbin/losetup -d $(/usr/sbin/losetup -j 2GiB.swap | /usr/bin/cut -d : -f 1)"
-
-        [Install]
-        WantedBy=local.target
-    - name: concourse_web.service
-      enable: true
-      command: start
-      content: |
-        [Unit]
-        Description=Start Concourse Web
-        After=docker.service
-        Requires=docker.service
-
-        [Service]
-        Restart=always
-        ExecStartPre=-/usr/bin/docker stop web
-        ExecStartPre=-/usr/bin/docker rm web
-        ExecStartPre=-/usr/bin/docker pull concourse/concourse:${concourse_version}
-        ExecStartPre=-/usr/bin/bash /home/core/prepare_concourse_keys.sh
-        ExecStart=/usr/bin/docker run --name web -h web -v '/home/core/keys/web:/concourse-keys' -e CONCOURSE_EXTERNAL_URL='${external_name}' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_BASIC_AUTH_USERNAME='${concourse_username}' -e CONCOURSE_BASIC_AUTH_PASSWORD='${concourse_password}' -e CONCOURSE_POSTGRES_DATA_SOURCE='postgres://${postgres_username}:${postgres_password}@${postgres_endpoint}/concourse?sslmode=disable' --restart=always -p 8080:8080 concourse/concourse:${concourse_version} web
-
-        [Install]
-        WantedBy=local.target
-    - name: concourse_worker.service
-      enable: true
-      command: start
-      content: |
-        [Unit]
-        Description=Start Concourse worker
-        After=concourse_web.service
-        Requires=concourse_web.service
-
-        [Service]
-        Restart=always
-        ExecStartPre=-/usr/bin/docker stop worker
-        ExecStartPre=-/usr/bin/docker rm worker
-        ExecStart=/usr/bin/docker run --name worker --link='web' --privileged -v '/home/core/keys/worker:/concourse-keys' -e CONCOURSE_GARDEN_DNS_SERVER='8.8.8.8' -e CONCOURSE_TSA_HOST='web:2222' --restart=always concourse/concourse:${concourse_version} worker
-        [Install]
-        WantedBy=local.target
-    - name: docker.service
-      enable: true
+runcmd:
+  - systemctl enable docker
+  - systemctl start docker
+  - systemctl start swap
+  - systemctl start concourse_web.service
+  - systemctl enable concourse_web.service
+  - sleep 3m
+  - systemctl start concourse_worker.service
+  - systemctl enable concourse_worker.service
