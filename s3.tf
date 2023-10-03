@@ -23,7 +23,6 @@ resource "aws_s3_bucket" "log_bucket" {
 
   bucket = var.s3_log_bucket_name
   acl    = "private"
-  region = var.region
   policy = data.aws_iam_policy_document.allow_alb_loggin_access[0].json
 
   lifecycle_rule {

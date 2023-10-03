@@ -6,10 +6,6 @@ resource "aws_db_subnet_group" "postgres" {
 resource "aws_db_parameter_group" "concourse" {
   name   = "${var.prefix}-concourse-${var.postgres_family}"
   family = var.postgres_family
-  
-  lifecycle = {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_db_instance" "postgres" {

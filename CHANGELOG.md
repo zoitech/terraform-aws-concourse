@@ -1,3 +1,12 @@
+## 2.0.0
+
+ENHANCEMENTS:
+* Upgraded terraform version to 0.13  [#16](https://github.com/zoitech/terraform-aws-concourse/issues/16)
+
+BACKWARDS INCOMPATIBILITIES / NOTES:
+* Works with terraform 0.13.x
+
+
 ## 1.2.0
 NEW FEATURES:
 * Add postgres_family variable
