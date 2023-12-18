@@ -6,10 +6,6 @@ resource "aws_db_subnet_group" "postgres" {
 resource "aws_db_parameter_group" "concourse" {
   name   = "${var.prefix}-concourse-${var.postgres_family}"
   family = var.postgres_family
-  
-  lifecycle = {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_db_instance" "postgres" {
@@ -19,8 +15,6 @@ resource "aws_db_instance" "postgres" {
   engine            = "postgres"
   engine_version    = var.postgres_version
   instance_class    = var.concourse_db_size
-
-  name                      = "concourse"
   username                  = var.postgres_username
   password                  = local.postgres_password
   db_subnet_group_name      = aws_db_subnet_group.postgres.id
@@ -34,9 +28,6 @@ resource "aws_db_instance" "postgres" {
   snapshot_identifier       = ""
   skip_final_snapshot       = false
   final_snapshot_identifier = "LastSnap"
-
-  #monitoring_role_arn = "${aws_iam_role.rds_monitoring.arn}"
-  #monitoring_interval = "${var.db_monitor_interval}"
   apply_immediately = true
 
   lifecycle {
