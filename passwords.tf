@@ -1,11 +1,11 @@
 resource "random_string" "postgres_password" {
   length  = 16
-  special = false
+  special = var.enable_special_char_in_random_password
 }
 
 resource "random_string" "concourse_password" {
   length  = 16
-  special = false
+  special = var.enable_special_char_in_random_password
 }
 
 locals {

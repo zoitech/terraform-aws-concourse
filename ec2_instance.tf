@@ -1,18 +1,3 @@
-data "aws_ami" "coreos" {
-  most_recent = true
-  owners      = ["679593333241"]
-
-  filter {
-    name   = "name"
-    values = ["CoreOS-${var.coreos_version}*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
 resource "aws_instance" "ec2_docker_instance" {
   ami                    = var.instance_ami
   instance_type          = var.instance_size

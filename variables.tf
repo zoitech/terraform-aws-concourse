@@ -37,11 +37,6 @@ variable "vpc_id" {
 }
 
 # Instance
-variable "coreos_version" {
-  description = "The CoreOS version to launch."
-  default     = "stable-"
-}
-
 variable "instance_key_name" {
   description = "The SSH key to use for connecting to the instance."
 }
@@ -94,7 +89,7 @@ variable "s3_log_bucket_Key_name" {
 
 variable "lifecycle_rule_id" {
   description = "Name of the lifecyle rule id."
-  default     = ""
+  default     = "rule1"
 }
 
 variable "lifecycle_rule_enabled" {
@@ -180,3 +175,7 @@ variable "concourse_db_size" {
   default     = "db.t2.micro"
 }
 
+variable "enable_special_char_in_random_password" {
+  description = "Enable special characters in random password."
+  default     = false
+}
