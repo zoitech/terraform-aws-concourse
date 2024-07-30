@@ -36,12 +36,12 @@ resource "aws_s3_bucket" "log_bucket" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {
-  count = var.enable_alb_access_logs ? 1 : 0
+  count  = var.enable_alb_access_logs ? 1 : 0
   bucket = aws_s3_bucket.log_bucket[0].id
 
   rule {
-    id      = var.lifecycle_rule_id      #required #default = ""
-    status = var.lifecycle_rule_enabled #default = false
+    id     = var.lifecycle_rule_id                               #required #default = ""
+    status = var.lifecycle_rule_enabled ? "Enabled" : "Disabled" #default = false
     filter {
       prefix = var.lifecycle_rule_prefix #default = whole bucket
     }
@@ -52,9 +52,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {
 }
 
 resource "aws_s3_bucket_acl" "log_bucket" {
-  count = var.enable_alb_access_logs ? 1 : 0
+  count  = var.enable_alb_access_logs ? 1 : 0
   bucket = aws_s3_bucket.log_bucket[0].id
-  acl = "private"
+  acl    = "private"
 }
 
 resource "aws_s3_bucket_object" "concourse_alb_access_logs" {
@@ -66,7 +66,7 @@ resource "aws_s3_bucket_object" "concourse_alb_access_logs" {
 }
 
 resource "aws_s3_bucket_policy" "log_bucket" {
-  count = var.enable_alb_access_logs ? 1 : 0
+  count  = var.enable_alb_access_logs ? 1 : 0
   bucket = aws_s3_bucket.log_bucket[0].id
   policy = data.aws_iam_policy_document.allow_alb_loggin_access[0].json
 }

@@ -1,3 +1,8 @@
+## 1.2.1
+FEATURES:
+* Remove CoreOS ami data source
+* Updated config for RDS and S3
+
 ## 1.2.0
 NEW FEATURES:
 * Add postgres_family variable
