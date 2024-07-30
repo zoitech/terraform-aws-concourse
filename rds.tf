@@ -45,7 +45,7 @@ resource "aws_db_event_subscription" "postgres" {
   sns_topic = aws_sns_topic.postgres.arn
 
   source_type = "db-instance"
-  source_ids  = [aws_db_instance.postgres.id]
+  source_ids  = [aws_db_instance.postgres.identifier]
 
   # see here for further event categories
   event_categories = [
