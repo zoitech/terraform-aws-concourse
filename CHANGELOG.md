@@ -1,3 +1,7 @@
+## 1.2.2
+HOTFIX:
+* Change aws_db_event_subscription.postgres source_id from id to identifier
+
 ## 1.2.1
 FEATURES:
 * Remove CoreOS ami data source
