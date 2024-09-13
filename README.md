@@ -68,6 +68,7 @@ Module managed by [Zoi](https://github.com/zoitech).
 
 ## License
 MIT License. See LICENSE for full details.
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -156,6 +157,7 @@ No modules.
 | <a name="input_role_policies"></a> [role\_policies](#input\_role\_policies) | The policies which would be attached to the EC2 Role. | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/AdministratorAccess"<br>]</pre> | no |
 | <a name="input_s3_log_bucket_Key_name"></a> [s3\_log\_bucket\_Key\_name](#input\_s3\_log\_bucket\_Key\_name) | Name of the folder to store logs in the bucket. | `string` | `""` | no |
 | <a name="input_s3_log_bucket_name"></a> [s3\_log\_bucket\_name](#input\_s3\_log\_bucket\_name) | Name of the logs bucket. | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Custom tags for the resources | `map(string)` | `{}` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC Id in which the EC2 Instance should be created. | `any` | n/a | yes |
 
 ## Outputs
@@ -169,3 +171,4 @@ No modules.
 | <a name="output_postgres_password"></a> [postgres\_password](#output\_postgres\_password) | n/a |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | n/a |
 | <a name="output_url"></a> [url](#output\_url) | n/a |
+<!-- END_TF_DOCS -->
