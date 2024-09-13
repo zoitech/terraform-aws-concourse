@@ -10,6 +10,8 @@ resource "aws_security_group" "GroupLB" {
     protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = merge({ Name = "Group-${var.prefix}.coucourse.LB", role = "security" }, var.tags)
 }
 
 resource "aws_security_group" "GroupWS" {
@@ -23,6 +25,8 @@ resource "aws_security_group" "GroupWS" {
     protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = merge({ Name = "Group-${var.prefix}.coucourse.WebServer", role = "security" }, var.tags)
 }
 
 # Rules
@@ -45,6 +49,8 @@ resource "aws_security_group" "RuleGroupLBHttpIn" {
 
     security_groups = [aws_security_group.GroupLB.id]
   }
+
+  tags = merge({ Name = "Rule-${var.prefix}.coucourse.LB-in-HTTP", role = "security" }, var.tags)
 }
 
 resource "aws_security_group" "RuleGroupWsIn" {
@@ -66,5 +72,7 @@ resource "aws_security_group" "RuleGroupWsIn" {
 
     security_groups = [aws_security_group.GroupWS.id]
   }
+
+  tags = merge({ Name = "Rule-${var.prefix}.coucourse.WS-in-5432", role = "security" }, var.tags)
 }
 

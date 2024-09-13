@@ -179,3 +179,9 @@ variable "enable_special_char_in_random_password" {
   description = "Enable special characters in random password."
   default     = false
 }
+
+variable "tags" {
+  description = "Custom tags for the resources"
+  type        = map(string)
+  default     = {}
+}
