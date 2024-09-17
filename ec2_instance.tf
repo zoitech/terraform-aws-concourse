@@ -22,6 +22,12 @@ resource "aws_instance" "ec2_docker_instance" {
     },
     var.tags)
 
+  volume_tags = merge(
+    { Name       = "${var.prefix}-${var.instance_name}", 
+      role       = "storage"
+    },
+    var.tags)
+
   lifecycle {
     create_before_destroy = true
   }
