@@ -36,6 +36,7 @@ resource "aws_db_instance" "postgres" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [engine_version]
   }
 
   tags = merge({ Name = "${lower(var.prefix)}-concourse-db", role = "database" }, var.tags)
