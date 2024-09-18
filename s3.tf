@@ -33,6 +33,8 @@ resource "aws_s3_bucket" "log_bucket" {
   #     days = var.lifecycle_rule_expiration #default = 90
   #   }
   # }
+
+  tags = merge({ Name = var.s3_log_bucket_name }, var.s3_tags)
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {

@@ -1,11 +1,15 @@
 resource "aws_db_subnet_group" "postgres" {
   name       = "${lower(var.prefix)}-private"
   subnet_ids = var.private_sn
+
+  tags = var.rds_tags
 }
 
 resource "aws_db_parameter_group" "concourse" {
   name   = "${var.prefix}-concourse-${var.postgres_family}"
   family = var.postgres_family
+
+  tags = var.rds_tags
 }
 
 resource "aws_db_instance" "postgres" {
@@ -32,12 +36,17 @@ resource "aws_db_instance" "postgres" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [engine_version]
   }
+
+  tags = merge({ Name = "${lower(var.prefix)}-concourse-db"}, var.rds_tags)
 }
 
 # Monitoring of DB events
 resource "aws_sns_topic" "postgres" {
   name = "${lower(var.prefix)}-rds-topic"
+
+  tags = merge({ Name = "${lower(var.prefix)}-rds-topic"}, var.sns_tags)
 }
 
 resource "aws_db_event_subscription" "postgres" {

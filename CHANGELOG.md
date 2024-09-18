@@ -1,3 +1,7 @@
+## 1.3.0
+FEATURES:
+* Add variables to tag resources
+
 ## 1.2.2
 HOTFIX:
 * Change aws_db_event_subscription.postgres source_id from id to identifier
