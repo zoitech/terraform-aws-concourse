@@ -180,8 +180,44 @@ variable "enable_special_char_in_random_password" {
   default     = false
 }
 
-variable "tags" {
-  description = "Custom tags for the resources"
+variable "ec2_tags" {
+  description = "Custom tags for the EC2 instance"
+  type        = map(string)
+  default     = {}
+}
+
+variable "ebs_tags" {
+  description = "Custom tags for the EBS volume"
+  type        = map(string)
+  default     = {}
+}
+
+variable "sg_tags" {
+  description = "Custom tags for the security groups"
+  type        = map(string)
+  default     = {}
+}
+
+variable "alb_tags" {
+  description = "Custom tags for the Application Load Balancer"
+  type        = map(string)
+  default     = {}
+}
+
+variable "s3_tags" {
+  description = "Custom tags for the S3 bucket"
+  type        = map(string)
+  default     = {}
+}
+
+variable "rds_tags" {
+  description = "Custom tags for the RDS instance"
+  type        = map(string)
+  default     = {}
+}
+
+variable "sns_tags" {
+  description = "Custom tags for the SNS topic"
   type        = map(string)
   default     = {}
 }

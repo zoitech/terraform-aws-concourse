@@ -125,6 +125,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_alb_sg_id"></a> [alb\_sg\_id](#input\_alb\_sg\_id) | The Security Group ID/s which should be attached to the Loadbalancer. | `list(string)` | n/a | yes |
+| <a name="input_alb_tags"></a> [alb\_tags](#input\_alb\_tags) | Custom tags for the Application Load Balancer | `map(string)` | `{}` | no |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | ARN of the certificate. | `string` | `""` | no |
 | <a name="input_concourse_db_size"></a> [concourse\_db\_size](#input\_concourse\_db\_size) | Size of the DB Instance. | `string` | `"db.t2.micro"` | no |
 | <a name="input_concourse_db_storage"></a> [concourse\_db\_storage](#input\_concourse\_db\_storage) | Size of the DB Disk. | `string` | `"100"` | no |
@@ -132,6 +133,8 @@ No modules.
 | <a name="input_concourse_password"></a> [concourse\_password](#input\_concourse\_password) | The Password for the default user on the Concourse Server. | `string` | `""` | no |
 | <a name="input_concourse_username"></a> [concourse\_username](#input\_concourse\_username) | The Username for the default user on the Concourse Server. | `string` | `"concourse"` | no |
 | <a name="input_concourse_version"></a> [concourse\_version](#input\_concourse\_version) | The Concourse version to launch. | `string` | `"3.4.1"` | no |
+| <a name="input_ebs_tags"></a> [ebs\_tags](#input\_ebs\_tags) | Custom tags for the EBS volume | `map(string)` | `{}` | no |
+| <a name="input_ec2_tags"></a> [ec2\_tags](#input\_ec2\_tags) | Custom tags for the EC2 instance | `map(string)` | `{}` | no |
 | <a name="input_enable_alb_access_logs"></a> [enable\_alb\_access\_logs](#input\_enable\_alb\_access\_logs) | Turn alb access logs on or off. | `bool` | `false` | no |
 | <a name="input_enable_special_char_in_random_password"></a> [enable\_special\_char\_in\_random\_password](#input\_enable\_special\_char\_in\_random\_password) | Enable special characters in random password. | `bool` | `false` | no |
 | <a name="input_instance_ami"></a> [instance\_ami](#input\_instance\_ami) | ami | `any` | n/a | yes |
@@ -153,11 +156,14 @@ No modules.
 | <a name="input_principle_account_id"></a> [principle\_account\_id](#input\_principle\_account\_id) | Set principle account ID for the region | `string` | `"156460612806"` | no |
 | <a name="input_private_sn"></a> [private\_sn](#input\_private\_sn) | The Public Subnets in which the EC2 Instance should be created. | `list(string)` | n/a | yes |
 | <a name="input_public_sn"></a> [public\_sn](#input\_public\_sn) | The Public Subnets in which the LB should be created. | `list(string)` | n/a | yes |
+| <a name="input_rds_tags"></a> [rds\_tags](#input\_rds\_tags) | Custom tags for the RDS instance | `map(string)` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to run in. | `string` | `"eu-west-1"` | no |
 | <a name="input_role_policies"></a> [role\_policies](#input\_role\_policies) | The policies which would be attached to the EC2 Role. | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/AdministratorAccess"<br>]</pre> | no |
 | <a name="input_s3_log_bucket_Key_name"></a> [s3\_log\_bucket\_Key\_name](#input\_s3\_log\_bucket\_Key\_name) | Name of the folder to store logs in the bucket. | `string` | `""` | no |
 | <a name="input_s3_log_bucket_name"></a> [s3\_log\_bucket\_name](#input\_s3\_log\_bucket\_name) | Name of the logs bucket. | `string` | `""` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Custom tags for the resources | `map(string)` | `{}` | no |
+| <a name="input_s3_tags"></a> [s3\_tags](#input\_s3\_tags) | Custom tags for the S3 bucket | `map(string)` | `{}` | no |
+| <a name="input_sg_tags"></a> [sg\_tags](#input\_sg\_tags) | Custom tags for the security groups | `map(string)` | `{}` | no |
+| <a name="input_sns_tags"></a> [sns\_tags](#input\_sns\_tags) | Custom tags for the SNS topic | `map(string)` | `{}` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC Id in which the EC2 Instance should be created. | `any` | n/a | yes |
 
 ## Outputs

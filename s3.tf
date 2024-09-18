@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "log_bucket" {
   #   }
   # }
 
-  tags = merge({ Name = var.s3_log_bucket_name, role = "storage" }, var.tags)
+  tags = merge({ Name = var.s3_log_bucket_name }, var.s3_tags)
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "log_bucket" {

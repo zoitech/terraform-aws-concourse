@@ -1,6 +1,6 @@
 ## 1.3.0
 FEATURES:
-* Add variable to tag resources
+* Add variables to tag resources
 
 ## 1.2.2
 HOTFIX:
