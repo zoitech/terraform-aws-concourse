@@ -1,11 +1,3 @@
-data "aws_caller_identity" "current" {
-}
-
-# Account
-provider "aws" {
-  region = var.region
-}
-
 variable "region" {
   description = "The AWS region to run in."
   default     = "eu-west-1"

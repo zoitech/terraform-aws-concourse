@@ -1,3 +1,13 @@
+## 2.0.0
+REMOVED:
+* AWS provider in variables.tf because this should not be in the module but in the root folder that terraform is called.
+
+MOVED:
+* Data source to data.tf file.
+
+ADDED:
+* .gitignore
+
 ## 1.3.0
 FEATURES:
 * Add variables to tag resources
