@@ -39,14 +39,14 @@ resource "aws_db_instance" "postgres" {
     ignore_changes  = [engine_version]
   }
 
-  tags = merge({ Name = "${lower(var.prefix)}-concourse-db"}, var.rds_tags)
+  tags = merge({ Name = "${lower(var.prefix)}-concourse-db" }, var.rds_tags)
 }
 
 # Monitoring of DB events
 resource "aws_sns_topic" "postgres" {
   name = "${lower(var.prefix)}-rds-topic"
 
-  tags = merge({ Name = "${lower(var.prefix)}-rds-topic"}, var.sns_tags)
+  tags = merge({ Name = "${lower(var.prefix)}-rds-topic" }, var.sns_tags)
 }
 
 resource "aws_db_event_subscription" "postgres" {

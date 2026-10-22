@@ -68,20 +68,20 @@ Module managed by [Zoi](https://github.com/zoitech).
 
 ## License
 MIT License. See LICENSE for full details.
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGIN_AUTOMATED_TF_DOCS_BLOCK -->
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
-| <a name="provider_template"></a> [template](#provider\_template) | n/a |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.70.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.9.1 |
+| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 
 ## Modules
 
@@ -90,7 +90,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_db_event_subscription.postgres](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_event_subscription) | resource |
 | [aws_db_instance.postgres](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | resource |
 | [aws_db_parameter_group.concourse](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group) | resource |
@@ -123,7 +123,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_alb_sg_id"></a> [alb\_sg\_id](#input\_alb\_sg\_id) | The Security Group ID/s which should be attached to the Loadbalancer. | `list(string)` | n/a | yes |
 | <a name="input_alb_tags"></a> [alb\_tags](#input\_alb\_tags) | Custom tags for the Application Load Balancer | `map(string)` | `{}` | no |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | ARN of the certificate. | `string` | `""` | no |
@@ -158,7 +158,7 @@ No modules.
 | <a name="input_public_sn"></a> [public\_sn](#input\_public\_sn) | The Public Subnets in which the LB should be created. | `list(string)` | n/a | yes |
 | <a name="input_rds_tags"></a> [rds\_tags](#input\_rds\_tags) | Custom tags for the RDS instance | `map(string)` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to run in. | `string` | `"eu-west-1"` | no |
-| <a name="input_role_policies"></a> [role\_policies](#input\_role\_policies) | The policies which would be attached to the EC2 Role. | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/AdministratorAccess"<br>]</pre> | no |
+| <a name="input_role_policies"></a> [role\_policies](#input\_role\_policies) | The policies which would be attached to the EC2 Role. | `list(string)` | <pre>[<br/>  "arn:aws:iam::aws:policy/AdministratorAccess"<br/>]</pre> | no |
 | <a name="input_s3_log_bucket_Key_name"></a> [s3\_log\_bucket\_Key\_name](#input\_s3\_log\_bucket\_Key\_name) | Name of the folder to store logs in the bucket. | `string` | `""` | no |
 | <a name="input_s3_log_bucket_name"></a> [s3\_log\_bucket\_name](#input\_s3\_log\_bucket\_name) | Name of the logs bucket. | `string` | `""` | no |
 | <a name="input_s3_tags"></a> [s3\_tags](#input\_s3\_tags) | Custom tags for the S3 bucket | `map(string)` | `{}` | no |
@@ -169,7 +169,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_alb_dns_name"></a> [alb\_dns\_name](#output\_alb\_dns\_name) | n/a |
 | <a name="output_alb_name"></a> [alb\_name](#output\_alb\_name) | n/a |
 | <a name="output_concourse_password"></a> [concourse\_password](#output\_concourse\_password) | n/a |
@@ -177,4 +177,4 @@ No modules.
 | <a name="output_postgres_password"></a> [postgres\_password](#output\_postgres\_password) | n/a |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | n/a |
 | <a name="output_url"></a> [url](#output\_url) | n/a |
-<!-- END_TF_DOCS -->
+<!-- END_AUTOMATED_TF_DOCS_BLOCK -->
